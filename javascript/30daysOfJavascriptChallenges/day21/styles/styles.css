@@ -1,0 +1,36 @@
+body {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3.5rem;
+}
+
+h2 {
+    text-decoration: underline;
+    color: #0a0a58e0;
+    font-size: 2rem;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    margin: 0.2rem 0;
+    padding: 1.5rem 1rem;
+    text-align: left;
+    cursor: pointer;
+}
+
+#title-year {
+    font-size: 6rem;
+}
+
+#fulldate {
+    margin: 0 auto;
+    padding: 0.7rem 0;
+    width: 25%;
+}
