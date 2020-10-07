@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="index.js" ></script>
+    <title>Promises 30DaysOfJavascript (Day18)</title>
+    <style>
+        h1 {
+            color: #903B27;
+        }
+
+        h1, h3 {
+            text-align: center;
+        }
+        
+        p {
+            width: 80%;
+            margin: 10px auto;
+            text-align: justify;
+        }
+
+        button {
+            display: block;
+            margin: .5rem auto 0;  /* top, sides, bottom */
+            background: rgb(240, 97, 2);
+            border-radius: 10px;
+        }
+
+        label {
+            text-align: center;
+        }
+
+        #flex-container div:first-child {
+	        background-color: #63A375;
+            width: 50%;
+            margin: 1.5rem auto 0.8rem;
+            display: flex;
+            flex-direction: column;
+            border-radius: 2px;
+            padding: 1.2rem 0;
+        }
+        
+        #targetRender {
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>CatSITE!</h1>
+    <h3>Promises 30DaysOfJavascript - Day18</h3>
+    <p>Welcome to the <em>CatSITE!</em> Here you'll be able to see different breeds of Cats and their average weight.</p>
+    <p>If you let the "Limit of Cats" number at 0 (default). Then you'll get all the cats. If you put any number there, you'll get at max, that number of cats!</p>
+
+    <div id="flex-container">
+        <div>
+            <label for="limitOfCatsInput">
+                Limit Of Cats
+                <input id="limitOfCatsInput" type="number" value="0" />
+            </label>
+            <button onClick="writeResults()">Calculate Average weight per CAT!</button>
+        </div>
+        
+        <div id="targetRender"></div>
+    </div>
+
+    <script>
+        async function writeResults() {
+            const catLimit = document.querySelector("#limitOfCatsInput").value;
+            console.log({catLimit});
+            const catsWithAvgWeight = await getCatsAvgWeight(catLimit);
+            
+            const contentToRender = catsWithAvgWeight
+                .map(cat => {
+                    return `<div style="border: solid 3px #504B43; background-color: #77AD78; width: 50%; text-align: center; margin: 5px auto; border-radius: 3px;">
+                        <p style="color: white">
+                            <b style="color: #F0CEA8">Breed's Name:</b> ${cat.name}
+                        </p>
+                        <p style="color: white">
+                            <b style="color: #F0CEA8">Average Weight:</b> ${cat.avgWeight} KG
+                        </p>
+                    </div>`
+                }).join("");
+
+            document.querySelector("#targetRender").innerHTML = `${contentToRender}`;
+        }
+    </script>
+</body>
+</html>
