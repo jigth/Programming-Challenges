@@ -1,0 +1,36 @@
+/** Basic Styles of the page.
+* Note: There are some styles applied by DOM manipulating from 'main.js', 
+* such as GRID.
+*/
+
+body {
+    width: 50%;
+    margin: 0 auto;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+h1, h2 {
+    margin-bottom: 0;
+}
+
+h2, h3 {
+    margin-top: 0;
+    text-decoration: underline;
+    font-weight: 100;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 1.7rem;
+}
+
+h2 {
+    font-size: 1.2rem;
+}
+
+h3 {
+    font-size: 0.8rem;
+}
