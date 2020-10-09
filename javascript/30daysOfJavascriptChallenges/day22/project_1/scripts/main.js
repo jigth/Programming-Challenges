@@ -52,28 +52,30 @@ const getColoredNumbers = () => {
     return coloredNumbers;
 }
 
+const main = () => {
+    const coloredNumbers = getColoredNumbers();
 
-const coloredNumbers = getColoredNumbers();
+    const wrapper = document.querySelector('.wrapper');
 
-const wrapper = document.querySelector('.wrapper');
+    wrapper.style.display = 'grid';
+    wrapper.style.gridTemplateColumns = '1fr '.repeat(6);
+    wrapper.style.gridGap = '0.3rem';
 
-wrapper.style.display = 'grid';
-wrapper.style.gridTemplateColumns = '1fr '.repeat(6);
-wrapper.style.gridGap = '0.3rem';
+    const domDivElements = [];
+    coloredNumbers.forEach(coloredNumber => {
+        const divElement = document.createElement('div');
+        divElement.textContent = coloredNumber.number;
+        divElement.style.backgroundColor = coloredNumber.color;
+        divElement.style.color = 'white';
+        divElement.style.textAlign = 'center';
+        divElement.style.padding = '1rem 0';
+        divElement.style.fontWeight = 'bold';
+        divElement.style.fontSize = '1.5rem';
+        domDivElements.push(divElement);
+    });
 
-const domDivElements = [];
-coloredNumbers.forEach(coloredNumber => {
-    const divElement = document.createElement('div');
-    divElement.textContent = coloredNumber.number;
-    divElement.style.backgroundColor = coloredNumber.color;
-    divElement.style.color = 'white';
-    divElement.style.textAlign = 'center';
-    divElement.style.padding = '1rem 0';
-    divElement.style.fontWeight = 'bold';
-    divElement.style.fontSize = '1.5rem';
-    domDivElements.push(divElement);
-});
+    wrapper.innerHTML = domDivElements.map(el => el.outerHTML)
+        .join('');
+}
 
-console.log(domDivElements[0].outerHTML)
-wrapper.innerHTML = domDivElements.map(el => el.outerHTML)
-    .join('');
+main();
