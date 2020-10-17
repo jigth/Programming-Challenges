@@ -1,4 +1,3 @@
-// Main object: asabenehChallenges2020
 const { description, challengeTitle, challengeSubtitle, challengeYear,
         keywords, author, challenges, } = asabenehChallenges2020;
 
@@ -15,6 +14,7 @@ const wrapper = document.querySelector('.wrapper');
 
 // Array of html for dom elements that will be rendered.  TODO: Collect Dom elements in order and render them using this array
 const domElementsToRender = [];
+
 
 
 // ******************************** TOP INFO ********************************** //
@@ -34,6 +34,7 @@ fullDate.setAttribute('id', 'fulldate');  // Id is used to target this element f
 fullDate.style.width = '27%';
 fullDate.style.margin = '0.7rem auto';
 wrapper.appendChild(fullDate);
+
 
 
 // ******************************** CHALLENGES INFO ********************************** //
@@ -92,6 +93,7 @@ challengesContainer.style.textAlign ='left';
 wrapper.appendChild(challengesContainer);
 
 
+
 // ******************************** AUTHOR INFO ********************************** //
 
 const authorFullName = document.createElement('h2');
@@ -116,8 +118,6 @@ const socialLinks = author.socialLinks.forEach(socialLink => {
     socialLinksContainer.appendChild(socialIcon);
 });
 
-console.log(socialLinksContainer)
-
 const authorBiography = document.createElement('p');
 authorBiography.textContent = author.bio;
 authorBiography.style.width = '80%';
@@ -125,3 +125,99 @@ authorBiography.style.margin = '0 auto';
 wrapper.appendChild(authorFullName);
 wrapper.appendChild(socialLinksContainer);
 wrapper.appendChild(authorBiography);
+
+// Generate a column list, each element of the list should be a simple object (not an object nor a list)
+function generateColumnList(title, list) {
+    const containerElement = document.createElement('div');
+    
+    // Create the container for the list of elements
+    const listContainerElement = document.createElement('ul');
+    listContainerElement.style.listStyle = 'none';
+
+    // Create column title
+    const columnTitle = document.createElement('h4');
+    columnTitle.textContent = title;
+    
+    // Create list items with the correct text content.
+    const listOfElements = list.map(element => {
+        const domListElement = document.createElement('li');
+        domListElement.textContent = element;
+        return domListElement.outerHTML;
+    }).join('');
+
+    // Append all childs to main container element
+    listContainerElement.innerHTML = listOfElements;
+    containerElement.appendChild(columnTitle);
+    containerElement.appendChild(listContainerElement);
+    
+    return containerElement;
+}
+
+/*** Grid columns for AUTHOR ***/
+const gridContainer = document.createElement('div');
+gridContainer.setAttribute('id', 'gridContainer');
+gridContainer.style.display = 'grid';
+gridContainer.style.gridTemplateColumns = '1fr 1fr 1fr';
+gridContainer.style.gridColumnGap = '1rem';
+
+// Author titles GRID COLUMN //
+const authorTitlesColumn = generateColumnList('Titles', author.titles);
+authorTitlesColumn.lastChild.style.textAlign = 'left';
+gridContainer.appendChild(authorTitlesColumn);
+
+// Author skills GRID COLUMN //
+const authorSkills = author.skills.map(skill => ['✅', skill]);
+const authorSkillsColumn = generateColumnList('Skills', authorSkills);
+authorSkillsColumn.lastChild.style.textAlign = 'left';
+gridContainer.appendChild(authorSkillsColumn);
+
+
+// Author qualifications GRID COLUMN //
+const authorQualifications = author.qualifications.map(qualification => ['📜', qualification]);
+const authorQualificationsColumn = generateColumnList('Qualifications', authorQualifications);
+authorQualificationsColumn.lastChild.style.textAlign = 'left';
+gridContainer.appendChild(authorQualificationsColumn);
+
+// Append gridContainer to DOM
+wrapper.appendChild(gridContainer);
+
+
+
+// ******************************** KEYWORDS SECTION ********************************** //
+const keywordsFlex = document.createElement('div');
+keywordsFlex.setAttribute('id', 'keywordsFlex');
+
+keywordsFlex.style.display = 'flex';
+keywordsFlex.style.flexWrap = 'wrap';
+
+const keywordsList = keywords.map(keyword => {
+    const keywordElement = document.createElement('div');
+    keywordElement.textContent = keyword;
+    return keywordElement.outerHTML;
+}).join("");
+
+keywordsFlex.innerHTML = keywordsList;
+
+const keywordsTitle = document.createElement('h4');
+keywordsTitle.textContent = 'Keywords';
+keywordsTitle.style.textAlign = 'left';
+wrapper.appendChild(keywordsTitle);
+wrapper.appendChild(keywordsFlex);
+
+function generateRandomColor() {
+    function generateRandomNumber() {
+        return Math.floor(Math.random() * 255) + 0;
+    }
+    const r = generateRandomNumber();
+    const g = generateRandomNumber();
+    const b = generateRandomNumber();
+    return `rgb(${r},${g},${b})`;
+}
+
+const flexItems = document.querySelector('#keywordsFlex').childNodes;
+flexItems.forEach(flexItem => {
+    flexItem.style.backgroundColor = generateRandomColor();
+    flexItem.style.margin = '0.1rem 0.5rem';
+    flexItem.style.borderRadius = '0.5rem';
+    flexItem.style.padding = '0.2rem';
+});
