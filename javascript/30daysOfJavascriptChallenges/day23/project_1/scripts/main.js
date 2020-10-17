@@ -14,7 +14,7 @@ const isPrimeNumber = (number) => {
 }
 
 /** Get prime numbers from a specified number to a specified limit number */
-const getPrimeNumbers = (from=0, to=101) => {
+const getPrimeNumbers = (from=0, to=102) => {
     const primeNumbers = [];
     for (let i = from; i <= to; i++) {
         if (isPrimeNumber(i)) {
@@ -24,8 +24,8 @@ const getPrimeNumbers = (from=0, to=101) => {
     return primeNumbers;
 }
 
-const getColoredNumbers = () => {
-    const primeNumbers = getPrimeNumbers();
+const getColoredNumbers = (from=0, to=102) => {
+    const primeNumbers = getPrimeNumbers(from, to);
     const primeNumbersWithColor = primeNumbers.map(primeNumber => { 
         return {
             number: primeNumber,
@@ -34,7 +34,7 @@ const getColoredNumbers = () => {
     });
 
     const coloredNumbers = [];
-    for (let i = 0; i <= 101; i++) {
+    for (let i = from; i < to; i++) {
         if (primeNumbers.includes(i)) {
             // If number is a prime number include the one with color (red)
             const primeToPush = primeNumbersWithColor.shift();
@@ -58,8 +58,22 @@ const getColoredNumbers = () => {
     return coloredNumbers;
 }
 
-const main = () => {
-    const coloredNumbers = getColoredNumbers();
+/** Allow to delete old numbers so that new calculated numbers are rendered alone 
+ *
+ * IMPORTANT!: This method is only triggered by user input and allows calculated 
+ * numbers to be rendered correctly (not stacked bellow of the previous calculated
+ * numbers)
+*/
+const refreshNumbers = () => {
+    if (document.querySelector('.primeWrapper') !== null) {
+        const primeWrapper = document.querySelector('.primeWrapper');
+        const wrapper = document.querySelector('.wrapper');
+        wrapper.removeChild(primeWrapper);
+    }
+}
+
+const displayNumbers = (from=0, to=102, override=false) => {
+    const coloredNumbers = getColoredNumbers(from, to);
 
     const wrapper = document.querySelector('.wrapper');
     const primeWrapper = document.createElement('div');
@@ -76,7 +90,6 @@ const main = () => {
         divElement.style.backgroundColor = coloredNumber.color;
         divElement.style.color = 'white';
         divElement.style.textAlign = 'center';
-        divElement.style.padding = '0.1rem 0.8rem';
         divElement.style.fontWeight = 'bold';
         divElement.style.fontSize = '1.8rem';
         domDivElements.push(divElement);
@@ -86,6 +99,10 @@ const main = () => {
         .join('');
 
     wrapper.appendChild(primeWrapper);
+
+    if (override) {
+        refreshNumbers();
+    }
 }
 
-main();
+// displayNumbers();
