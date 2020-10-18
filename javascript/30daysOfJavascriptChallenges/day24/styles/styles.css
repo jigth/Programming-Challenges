@@ -1,0 +1,41 @@
+* {
+    font-family: 'Montserrat';
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('../images/galaxy.gif');
+    width: 80%;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+}
+
+header h1 {
+    color: whitesmoke;
+    text-shadow: 3px 3px 5px gray;
+}
+
+header input {
+    height: 1.8rem;
+}
+
+header select {
+    height: 1.8rem;
+}
+
+header button {
+    background-color: gray;
+    color: white;
+    font-family: inherit; 
+    height: 1.8rem;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(128, 128, 128, 0.245);
+    margin-top: 1.5rem;
+}
