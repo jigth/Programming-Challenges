@@ -5,7 +5,7 @@
 
 body {
     background-image: url('../images/galaxy.gif');
-    width: 80%;
+    width: 75%;
     margin: 0 auto;
 }
 
@@ -14,8 +14,9 @@ header {
 }
 
 header h1 {
-    color: whitesmoke;
-    text-shadow: 3px 3px 5px gray;
+    color: rgb(230, 229, 229);
+    text-shadow: 2px 2px 3px gray;
+    margin-bottom: 3rem;
 }
 
 header input {
@@ -24,6 +25,8 @@ header input {
 
 header select {
     height: 1.8rem;
+    color: gray;
+    border-radius: 5px;
 }
 
 header button {
@@ -31,6 +34,7 @@ header button {
     color: white;
     font-family: inherit; 
     height: 1.8rem;
+    border-radius: 5px;
 }
 
 .flex-container {
@@ -38,4 +42,15 @@ header button {
     justify-content: center;
     background-color: rgba(128, 128, 128, 0.245);
     margin-top: 1.5rem;
+}
+
+.flex-container .image {
+    display: inherit;
+    justify-content: center;
+    align-self: center;
+}
+
+.flex-container .image img {
+    width: 55%;
+    padding: 1.8rem 0;
 }
